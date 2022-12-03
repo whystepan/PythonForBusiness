@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="hstack">
+            <h2 class="display-5 my-4 text-white"> <b>Список актуальных туров</b></h2>
+            <a class="btn btn-outline-light ms-auto " href="/admin">База данных</a>
+        </div>
+
+        {% if tours %}
+            {% for tour in tours %}
+                <div class="card mb-4">
+                    <img src=" {{ tour.image.url }}" class="card-img-top" style="max-height: 20rem; object-fit: cover">
+                    <div class="card-body">
+                        <p class="card-title fs-4"> {{ tour.title }}</p>
+                        <p class="card-text">
+                            {{ tour.description }}
+                        </p>
+                    </div>
+                    <div class="card-footer hstack">
+                        <a class="btn btn-primary ms-auto" href="/tour/{{ tour.id }}"> Записаться на тур</a>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <p class="alert alert-light">На данный момент туры отсутствуют.</p>
+        {% endif %}
+    </div>
+{% endblock %}
